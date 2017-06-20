@@ -166,8 +166,7 @@ with tf.Session() as sess:
     print()
     for i in range(EPOCHS):
         X_train, y_train = shuffle(X_train, y_train)
-       # for offset in range(0, num_examples, BATCH_SIZE):
-        for offset in range(0, BATCH_SIZE, BATCH_SIZE):
+        for offset in range(0, num_examples, BATCH_SIZE):
             end = offset + BATCH_SIZE
             batch_x, batch_y = X_train[offset:end], y_train[offset:end]
             for dd in range(len(batch_x)):
@@ -184,16 +183,10 @@ with tf.Session() as sess:
         if(test_accuracy>maxa):
            maxa=test_accuracy
            a=tf.train.Saver()
-           save_path='C:\research\YUVprecision\traffic-signs-data\bbb.ckpt'
-           if not os.path.isabs(save_path):
-                save_path = os.path.abspath(os.path.join(os.getcwd(), save_path))
-           a.save(sess,save_path)
+           a.save(sess,"./asd")
     try:
         saver
     except NameError:
-        saver = tf.train.Saver()
-    save_path='C:\research\YUVprecision\traffic-signs-data\lenet2'
-    if not os.path.isabs(save_path):
-        save_path = os.path.abspath(os.path.join(os.getcwd(), save_path))	
-    saver.save(sess, 'lenet2')
+        saver = tf.train.Saver()	
+    saver.save(sess, './lenet2')
     print("Model saved")
